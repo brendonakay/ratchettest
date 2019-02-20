@@ -7,18 +7,18 @@ TODO:
 package main
 
 import (
-    "github.com/dailyburn/ratchet"
-    "github.com/dailyburn/ratchet/logger"
-    "github.com/dailyburn/ratchet/processors"
-    "ratchettest/packages"
-    "database/sql"
-    _ "github.com/go-sql-driver/mysql"
+	"database/sql"
+	"github.com/dailyburn/ratchet"
+	"github.com/dailyburn/ratchet/logger"
+	"github.com/dailyburn/ratchet/processors"
+	_ "github.com/go-sql-driver/mysql"
+	"ratchettest/packages"
 )
 
 // I have no idea what I'm doing :]
 func main() {
-    inputDB := setupDB("mysql", "root:@tcp(127.0.0.1:3306)/srcDB")
-    extractDP := processors.NewSQLReader(inputDB, mypkg.Query(5))
+	inputDB := setupDB("mysql", "root:@tcp(127.0.0.1:3306)/srcDB")
+	extractDP := processors.NewSQLReader(inputDB, mypkg.Query(5))
 
 	outputDB := setupDB("mysql", "root@tcp(127.0.0.1:3306)/dstDB")
 	outputTable := "users2"
@@ -26,7 +26,7 @@ func main() {
 
 	pipeline := ratchet.NewPipeline(extractDP, transformDP, loadDP)
 	pipeline.Name = "My Pipeline"
-	
+
 	err := <-pipeline.Run()
 	if err != nil {
 		logger.ErrorWithoutTrace(pipeline.Name, ":", err)
@@ -37,10 +37,10 @@ func main() {
 }
 
 func setupDB(driver, conn string) *sql.DB {
-    db, err := sql.Open(driver, conn)
-    if err != nil {
-        logger.Error(err)
-        panic(err)
-    }
-    return db
+	db, err := sql.Open(driver, conn)
+	if err != nil {
+		logger.Error(err)
+		panic(err)
+	}
+	return db
 }
