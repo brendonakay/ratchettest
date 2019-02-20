@@ -10,7 +10,7 @@ import (
     "github.com/dailyburn/ratchet"
     "github.com/dailyburn/ratchet/logger"
     "github.com/dailyburn/ratchet/processors"
-    "github.com/brendonakay/ratchettest/packages"
+    "ratchettest/packages"
     "database/sql"
     _ "github.com/go-sql-driver/mysql"
 )
