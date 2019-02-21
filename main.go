@@ -11,7 +11,8 @@ import (
 	"github.com/dailyburn/ratchet"
 	"github.com/dailyburn/ratchet/logger"
 	"github.com/dailyburn/ratchet/processors"
-	_ "github.com/go-sql-driver/mysql"
+	//_ "github.com/go-sql-driver/mysql"
+	"encoding/csv"
 	"ratchettest/packages"
 )
 
@@ -38,11 +39,12 @@ func main() {
 	}
 }
 
-func setupDB(driver, conn string) *sql.DB {
-	db, err := sql.Open(driver, conn)
+// Open the CSV file. CSV file must be in same directory as program.
+func setupCSV(driver, conn string) *sql.DB {
+	csvFile, err := os.Open("people.csv")
 	if err != nil {
 		logger.Error(err)
 		panic(err)
 	}
-	return db
+	return csvFile
 }
