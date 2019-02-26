@@ -20,6 +20,8 @@ func main() {
 	inputDB := setupDB("mysql", "root:@tcp(127.0.0.1:3306)/srcDB")
 	extractDP := processors.NewSQLReader(inputDB, mypkg.Query(5))
 
+ 	transformDP := mypkg.NewMyTransformer()
+
 	outputDB := setupDB("mysql", "root@tcp(127.0.0.1:3306)/dstDB")
 	outputTable := "users2"
 	loadDP := processors.NewSQLWriter(outputDB, outputTable)
