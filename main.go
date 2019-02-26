@@ -26,7 +26,7 @@ func main() {
 	extractCSV := processors.NewFileReader(inputCSV)
 
 	// TODO: Rewrite to CSVTransformaer
- 	transformDP := mypkg.NewMyTransformer()
+	transformDP := mypkg.NewMyTransformer()
 
 	// TODO: Do the same as above with writing out to CSV
 	outputDB := setupDB("mysql", "root@tcp(127.0.0.1:3306)/dstDB")
