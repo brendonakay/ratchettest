@@ -22,6 +22,8 @@ import (
 func main() {
 	// inputDB := setupDB("mysql", "root:@tcp(127.0.0.1:3306)/srcDB")
 	inputCSV := setupCSV("people.csv")
+	// Not sure if this is a better approach?
+	//inputCsvReader := csv.NewReader(bufio.NewReader(csvFile))
 	// extractDP := processors.NewSQLReader(inputDB, mypkg.Query(5)) //TODO: rewrite to extractCSV
 	extractCSV := processors.NewFileReader(inputCSV)
 
