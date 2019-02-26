@@ -20,12 +20,12 @@ import (
 
 // I have no idea what I'm doing :]
 func main() {
-	// inputDB := setupDB("mysql", "root:@tcp(127.0.0.1:3306)/srcDB")
-	inputCSV := setupCSV("people.csv")
+	//inputCSV := setupCSV("people.csv")
 	// Not sure if this is a better approach?
 	//inputCsvReader := csv.NewReader(bufio.NewReader(csvFile))
 	// extractDP := processors.NewSQLReader(inputDB, mypkg.Query(5)) //TODO: rewrite to extractCSV
-	extractCSV := processors.NewFileReader(inputCSV)
+	//extractCSV := processors.NewFileReader(inputCSV)
+	extractCSV := processors.NewFileReader("people.csv")
 
 	// TODO: Rewrite to CSVTransformaer
 	transformDP := mypkg.NewMyTransformer()
@@ -49,8 +49,8 @@ func main() {
 }
 
 // Open the CSV file. CSV file must be in same directory as program.
-// TODO: return type might be not right
-func setupCSV(file) *FileReader {
+// TODO: return type might be not right | maybe now tho?
+func setupCSV(file) *Reader {
 	csvFile, err := os.Open(file)
 	if err != nil {
 		logger.Error(err)
