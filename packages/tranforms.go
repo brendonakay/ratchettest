@@ -21,14 +21,14 @@ type TransformedData struct {
     SomeNewField   string `json:"some_new_field"`
 }
 
-func (t *myTransformer) ProcessData(d data.JSON, 
+func (t *myTransformer) ProcessData(d data.JSON,
                                     outputChan chan data.JSON,
                                     killChan chan error) {
 
     // Step 1: Unmarshal json into slice of ReceivedData structs
     var users []ReceivedData
-    var transforms []TransformedData 
-    
+    var transforms []TransformedData
+
     err := data.ParseJSON(d, &users)
     util.KillPipelineIfErr(err, killChan)
 
@@ -41,7 +41,7 @@ func (t *myTransformer) ProcessData(d data.JSON,
     }
 
     // Step 3: Marshal transformed data and send to next stage
-    if len(transforms) > 0 {    
+    if len(transforms) > 0 {
         dd, err := data.NewJSON(transforms)
         util.KillPipelineIfErr(err, killChan)
         outputChan <- dd

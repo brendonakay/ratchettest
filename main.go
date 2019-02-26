@@ -1,5 +1,6 @@
 /*
 Tutorial: http://rkulla.blogspot.com/2016/01/data-pipeline-and-etl-tasks-in-go-using.html
+TP stands for "Data Pipeline"
 TODO:
 	- Refactor mysql input & processors reader to csv
 		- Rewrite setupDB to setupCSV
@@ -20,6 +21,7 @@ import (
 // I have no idea what I'm doing :]
 func main() {
 	// inputDB := setupDB("mysql", "root:@tcp(127.0.0.1:3306)/srcDB")
+	inputCSV := setupCSV("people.csv")
 	// extractDP := processors.NewSQLReader(inputDB, mypkg.Query(5)) //TODO: rewrite to extractCSV
 	extractCSV := processors.NewFileReader(inputCSV)
 
@@ -45,8 +47,9 @@ func main() {
 }
 
 // Open the CSV file. CSV file must be in same directory as program.
-func setupCSV(driver, conn string) *FileReader {
-	csvFile, err := os.Open("people.csv")
+// TODO: return type might be not right
+func setupCSV(file) *FileReader {
+	csvFile, err := os.Open(file)
 	if err != nil {
 		logger.Error(err)
 		panic(err)
