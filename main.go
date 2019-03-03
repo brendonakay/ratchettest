@@ -9,21 +9,20 @@ TODO:
 package main
 
 import (
-	"database/sql"
+	"os"
+	"io"
+	//"bufio"
 	"github.com/dailyburn/ratchet"
 	"github.com/dailyburn/ratchet/logger"
 	"github.com/dailyburn/ratchet/processors"
-	//_ "github.com/go-sql-driver/mysql"
-	"encoding/csv"
+	//"encoding/csv"
 	"ratchettest/packages"
 )
 
 // I have no idea what I'm doing :]
 func main() {
-	//inputCSV := setupCSV("people.csv")
-	// Not sure if this is a better approach?
-	//inputCsvReader := csv.NewReader(bufio.NewReader(csvFile))
-	// extractDP := processors.NewSQLReader(inputDB, mypkg.Query(5)) //TODO: rewrite to extractCSV
+	csvFile := setupCSV("people.csv")
+	//	writer := csv.NewWriter(bufio.NewWriter(csvFile))
 	//extractCSV := processors.NewFileReader(inputCSV)
 	extractDP := processors.NewFileReader("people.csv")
 
@@ -33,7 +32,7 @@ func main() {
 	// TODO: Do the same as above with writing out to CSV
 	//outputDB := setupDB("mysql", "root@tcp(127.0.0.1:3306)/dstDB")
 	//outputTable := "users2"
-	loadDP := processors.NewCSVWriter("peopleTransformed.csv")
+	loadDP := processors.NewCSVWriter(csvFile)
 
 	// TODO: refactior da pipelane
 	pipeline := ratchet.NewPipeline(extractDP, transformDP, loadDP)
@@ -50,7 +49,7 @@ func main() {
 
 // Open the CSV file. CSV file must be in same directory as program.
 // TODO: return type might be not right | maybe now tho?
-func setupCSV(file) *Reader {
+func setupCSV(file string) io.Writer {
 	csvFile, err := os.Open(file)
 	if err != nil {
 		logger.Error(err)
