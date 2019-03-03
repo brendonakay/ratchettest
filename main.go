@@ -29,9 +29,6 @@ func main() {
 	// TODO: Rewrite to CSVTransformaer
 	transformDP := mypkg.NewMyTransformer()
 
-	// TODO: Do the same as above with writing out to CSV
-	//outputDB := setupDB("mysql", "root@tcp(127.0.0.1:3306)/dstDB")
-	//outputTable := "users2"
 	loadDP := processors.NewCSVWriter(csvFile)
 
 	// TODO: refactior da pipelane
