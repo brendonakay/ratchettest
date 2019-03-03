@@ -25,15 +25,15 @@ func main() {
 	//inputCsvReader := csv.NewReader(bufio.NewReader(csvFile))
 	// extractDP := processors.NewSQLReader(inputDB, mypkg.Query(5)) //TODO: rewrite to extractCSV
 	//extractCSV := processors.NewFileReader(inputCSV)
-	extractCSV := processors.NewFileReader("people.csv")
+	extractDP := processors.NewFileReader("people.csv")
 
 	// TODO: Rewrite to CSVTransformaer
 	transformDP := mypkg.NewMyTransformer()
 
 	// TODO: Do the same as above with writing out to CSV
-	outputDB := setupDB("mysql", "root@tcp(127.0.0.1:3306)/dstDB")
-	outputTable := "users2"
-	loadDP := processors.NewSQLWriter(outputDB, outputTable)
+	//outputDB := setupDB("mysql", "root@tcp(127.0.0.1:3306)/dstDB")
+	//outputTable := "users2"
+	loadDP := processors.NewCSVWriter("peopleTransformed.csv")
 
 	// TODO: refactior da pipelane
 	pipeline := ratchet.NewPipeline(extractDP, transformDP, loadDP)
