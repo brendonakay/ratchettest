@@ -61,6 +61,9 @@ func GetDataFromCsv(csv string, batchSize int) (chan data.JSON, error) {
 	return dataChan, nil
 }
 
+// TODO: check out https://golang.org/pkg/bufio/#ScanLines
+//   The point is to remove the use of sql.Rows 
+//
 // Overwrite github.com/dailyburn/ratchet/util.ScanDataGeneric
 func scanDataGeneric(rows *Reader, columns int, batchSize int, dataChan chan data.JSON) {
 	defer os.Close()

@@ -15,6 +15,8 @@ TODO:
 
 		o Implement NewCsvReader and CsvReader
 			- Look at NewSqlReader
+
+		o bufio.Scanner for scanDataGeneric used in getDavaFromCsv
 */
 package main
 
