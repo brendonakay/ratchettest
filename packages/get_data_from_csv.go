@@ -42,6 +42,8 @@ func GetDataFromCsv(csv string, batchSize int) (chan data.JSON, error) {
 	}
 	defer os.Close()
 
+	// TODO: Maybe initialize a bufio.Scanner and use the csv encoding lib to
+	//	csv encode the lines? ... And then JSON marshall?
     reader := csv.NewReader(bufio.NewReader(csvFile))
 
 	//rows, err := stmt.Query()
